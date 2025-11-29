@@ -1,0 +1,79 @@
+# Base Deployment Template for Backend Applications
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app # Placeholder name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      imagePullSecrets:
+        - name: harbor-pull-secret # Injected by Terraform
+      containers:
+        - name: app
+          image: placeholder-image # Will be replaced by components
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080 # Default Spring Boot port
+              name: http
+          env:
+            # Common Env Vars for ALL services
+            # --- Database Config (Common) ---
+            - name: SERVICE_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-username
+            - name: SERVICE_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-password # Placeholder key, different per service
+            # --- RabbitMQ Config (Common) ---
+            - name: SERVICE_RABBITMQ_HOST
+              value: "rabbitmq" # Service name in K8s
+            - name: SERVICE_RABBITMQ_PORT
+              value: "5672"
+            - name: SERVICE_RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: rabbitmq-username
+            - name: SERVICE_RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: rabbitmq-password
+            # --- JWT Config (Common) ---
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: jwt-secret-key
+            - name: JWT_EXPIRATION
+              value: "86400000" # Default 24h
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10

@@ -1,0 +1,13 @@
+# Base Service Template for Backend Applications
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-app # Placeholder
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+  selector:
+    app: backend-app

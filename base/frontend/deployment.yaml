@@ -1,0 +1,39 @@
+# Base Deployment Template for Frontend Application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      imagePullSecrets:
+        - name: harbor-pull-secret
+      containers:
+        - name: web
+          image: placeholder-image
+          ports:
+            - containerPort: 80
+              name: http
+          env:
+            # Defaults (can be overridden in overlays)
+            - name: USER_API_BASE_URL
+              value: "http://user-service:8081/api"
+            - name: EVENT_API_BASE_URL
+              value: "http://event-service:8082/api"
+            - name: BOOKING_API_BASE_URL
+              value: "http://booking-service:8083/api"
+            - name: TICKETING_API_BASE_URL
+              value: "http://ticketing-service:8084/api"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
