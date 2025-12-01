@@ -1,0 +1,29 @@
+##### Patching Backend Deployment for Audit Service #####
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app
+  setName: audit-service # Patch name
+spec:
+  selector:
+    matchLabels:
+      app: audit-service # Patch labels
+  template:
+    metadata:
+      labels:
+        app: audit-service # Patch labels
+    spec:
+      containers:
+        - name: app
+          image: helabooking/audit-service:latest # Patch image
+          ports:
+            - containerPort: 8086 # Patch port
+              name: http
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://auditdb-svc:5432/auditdb" # Patch DB URL
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-audit-db-password # Patch password key

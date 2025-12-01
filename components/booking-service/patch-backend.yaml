@@ -1,0 +1,29 @@
+##### Patching Backend Deployment for Booking Service #####
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app
+  setName: booking-service # Patch name
+spec:
+  selector:
+    matchLabels:
+      app: booking-service # Patch labels
+  template:
+    metadata:
+      labels:
+        app: booking-service # Patch labels
+    spec:
+      containers:
+        - name: app
+          image: helabooking/booking-service:latest # Patch image
+          ports:
+            - containerPort: 8083 # Patch port
+              name: http
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://bookingdb-svc:5432/bookingdb" # Patch DB URL
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-booking-db-password # Patch password key

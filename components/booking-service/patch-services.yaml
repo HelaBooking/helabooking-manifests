@@ -1,0 +1,44 @@
+##### Patching Backend Services for Booking Service #####
+# Rename Backend Service
+- op: replace
+  path: /metadata/name
+  value: booking-service-svc # Patch Pod Service name
+  target:
+    kind: Service
+    name: backend-app
+
+- op: replace
+  path: /spec/selector/app
+  value: booking-service # Patch Pod labels
+  target:
+    kind: Service
+    name: backend-app
+
+- op: replace
+  path: /spec/ports/0/port
+  value: 8083 # Patch port
+  target:
+    kind: Service
+    name: backend-app
+
+- op: replace
+  path: /spec/ports/0/targetPort
+  value: 8083 # Patch target port
+  target:
+    kind: Service
+    name: backend-app
+
+# Rename Database Service
+- op: replace
+  path: /metadata/name
+  value: bookingdb-svc # Patch DB service name
+  target:
+    kind: Service
+    name: database
+
+- op: replace
+  path: /spec/selector/app
+  value: bookingdb-pgsql # Patch DB labels
+  target:
+    kind: Service
+    name: database

@@ -1,0 +1,26 @@
+##### Patching Backend Database for Event Service #####
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: database
+  setName: eventdb-pgsql # Patch name
+spec:
+  serviceName: eventdb-svc # Patch service name
+  selector:
+    matchLabels:
+      app: eventdb-pgsql # Patch labels
+  template:
+    metadata:
+      labels:
+        app: eventdb-pgsql # Patch labels
+    spec:
+      containers:
+        - name: postgres
+          env:
+            - name: POSTGRES_DB
+              value: "eventdb" # Patch DB name
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-event-db-password # Patch password key

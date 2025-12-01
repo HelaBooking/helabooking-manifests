@@ -25,27 +25,27 @@ spec:
           env:
             # Common Env Vars for ALL services
             # --- Database Config (Common) ---
-            - name: SERVICE_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: app_secrets
                   key: pgsql-username
-            - name: SERVICE_DATASOURCE_PASSWORD
+            - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: app_secrets
                   key: pgsql-password # Placeholder key, different per service
             # --- RabbitMQ Config (Common) ---
-            - name: SERVICE_RABBITMQ_HOST
+            - name: SPRING_RABBITMQ_HOST
               value: "rabbitmq" # Service name in K8s
-            - name: SERVICE_RABBITMQ_PORT
+            - name: SPRING_RABBITMQ_PORT
               value: "5672"
-            - name: SERVICE_RABBITMQ_USERNAME
+            - name: SPRING_RABBITMQ_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: app_secrets
                   key: rabbitmq-username
-            - name: SERVICE_RABBITMQ_PASSWORD
+            - name: SPRING_RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: app_secrets

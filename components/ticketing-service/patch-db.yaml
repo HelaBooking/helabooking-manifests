@@ -1,0 +1,26 @@
+##### Patching Backend Database for Ticketing Service #####
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: database
+  setName: ticketingdb-pgsql # Patch name
+spec:
+  serviceName: ticketingdb-svc # Patch service name
+  selector:
+    matchLabels:
+      app: ticketingdb-pgsql # Patch labels
+  template:
+    metadata:
+      labels:
+        app: ticketingdb-pgsql # Patch labels
+    spec:
+      containers:
+        - name: postgres
+          env:
+            - name: POSTGRES_DB
+              value: "ticketingdb" # Patch DB name
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app_secrets
+                  key: pgsql-ticketing-db-password # Patch password key
