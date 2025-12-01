@@ -37,7 +37,7 @@ spec:
                   key: pgsql-password # Placeholder key, different per service
             # --- RabbitMQ Config (Common) ---
             - name: SPRING_RABBITMQ_HOST
-              value: "rabbitmq" # Service name in K8s
+              value: "rabbitmq.svc.cluster.local" # Service name in K8s
             - name: SPRING_RABBITMQ_PORT
               value: "5672"
             - name: SPRING_RABBITMQ_USERNAME

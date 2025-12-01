@@ -1,0 +1,17 @@
+###### Patching environment variables for dev environment ######
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ignored # This patch targets specific resources by label or name matching below
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          env:
+            - name: SPRING_RABBITMQ_HOST
+              value: "rabbitmq-env-dev.svc.cluster.local"
+target:
+  # Target all backend deployments
+  labelSelector: "app in (user-service, event-service, booking-service, ticketing-service, notification-service, audit-service)"
+  kind: Deployment

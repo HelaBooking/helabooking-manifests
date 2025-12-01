@@ -1,0 +1,24 @@
+###### Kustomization Template for Development Environment ######
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: helabooking-dev
+
+# Aggregate all the Components
+resources:
+  - ../../components/user-service
+  - ../../components/event-service
+  - ../../components/booking-service
+  - ../../components/ticketing-service
+  - ../../components/notification-service
+  - ../../components/audit-service
+  - ../../components/frontend
+
+# Apply Dev-Specific Global Patches
+patches:
+  - path: patch-env.yaml
+  - path: patch-resources.yaml
+
+# Global Labels (Optional but recommended for querying)
+commonLabels:
+  environment: dev

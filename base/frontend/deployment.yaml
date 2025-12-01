@@ -31,6 +31,13 @@ spec:
               value: "http://booking-service:8083/api"
             - name: TICKETING_API_BASE_URL
               value: "http://ticketing-service:8084/api"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           livenessProbe:
             httpGet:
               path: /
