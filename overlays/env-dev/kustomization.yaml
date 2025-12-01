@@ -20,5 +20,6 @@ patches:
   - path: patch-resources.yaml
 
 # Global Labels (Optional but recommended for querying)
-commonLabels:
-  environment: dev
+labels:
+  - pairs:
+      environment: dev
