@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
-  setName: event-service # Patch name
 spec:
   selector:
     matchLabels:
@@ -16,14 +15,11 @@ spec:
       containers:
         - name: app
           image: helabooking/event-service:latest # Patch image
-          ports:
-            - containerPort: 8082 # Patch port
-              name: http
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://eventdb-svc:5432/eventdb" # Patch DB URL
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-event-db-password # Patch password key

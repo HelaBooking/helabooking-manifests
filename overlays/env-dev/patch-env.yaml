@@ -9,9 +9,7 @@ spec:
       containers:
         - name: app
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev" # Patch the profile
             - name: SPRING_RABBITMQ_HOST
-              value: "rabbitmq-env-dev.svc.cluster.local"
-target:
-  # Target all backend deployments
-  labelSelector: "app in (user-service, event-service, booking-service, ticketing-service, notification-service, audit-service)"
-  kind: Deployment
+              value: "rabbitmq-env-dev.svc.cluster.local" # Patch RabbitMQ host

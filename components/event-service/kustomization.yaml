@@ -7,21 +7,71 @@ resources:
   - ../../base/backends # The Spring Boot App
   - ../../base/databases # The Postgres DB
 
-# Rename Resources (Standardizing names)
+# Patching Resources
 patches:
-  - path: patch-backend.yaml
-    target:
+  # INLINE PATCH: Configure Backend Deployment (Rename + Port)
+  - target:
       group: apps
       version: v1
       kind: Deployment
       name: backend-app
-  - path: patch-db.yaml
-    target:
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: event-service 
+      - op: replace
+        path: /spec/template/spec/containers/0/ports/0/containerPort
+        value: 8082
+
+  # INLINE PATCH: Configure Database StatefulSet (Rename Only)
+  - target:
       group: apps
       version: v1
       kind: StatefulSet
       name: database
-  - path: patch-services.yaml
-    target:
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: eventdb-pgsql
+
+  # INLINE PATCH: Configure Backend Service (Rename + Fix Port)
+  - target:
       version: v1
       kind: Service
+      name: backend-app
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: event-service-svc
+      - op: replace
+        path: /spec/selector/app
+        value: event-service
+      - op: replace
+        path: /spec/ports/0/port
+        value: 8082
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 8082
+
+  # INLINE PATCH: Configure Database Service (Rename)
+  - target:
+      version: v1
+      kind: Service
+      name: database
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: eventdb-svc
+      - op: replace
+        path: /spec/selector/app
+        value: eventdb-pgsql
+
+  # FILE PATCHES: Content Updates (Env Vars, Images)
+  - path: patch-backend.yaml
+    target:
+      kind: Deployment
+      name: backend-app
+  - path: patch-db.yaml
+    target:
+      kind: StatefulSet
+      name: database

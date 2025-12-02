@@ -1,0 +1,19 @@
+##### Patching resource requests and limits for dev environment ######
+############# Backend Services #############
+# Applies to all backend services
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-resources-patch
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "300m"

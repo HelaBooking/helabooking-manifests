@@ -28,12 +28,12 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-username
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-password # Placeholder key, different per service
             # --- RabbitMQ Config (Common) ---
             - name: SPRING_RABBITMQ_HOST
@@ -43,18 +43,18 @@ spec:
             - name: SPRING_RABBITMQ_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: rabbitmq-username
             - name: SPRING_RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: rabbitmq-password
             # --- JWT Config (Common) ---
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: jwt-secret-key
             - name: JWT_EXPIRATION
               value: "86400000" # Default 24h

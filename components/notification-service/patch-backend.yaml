@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
-  setName: notification-service # Patch name
 spec:
   selector:
     matchLabels:
@@ -16,14 +15,11 @@ spec:
       containers:
         - name: app
           image: helabooking/notification-service:latest # Patch image
-          ports:
-            - containerPort: 8085 # Patch port
-              name: http
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://notificationdb-svc:5432/notificationdb" # Patch DB URL
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-notification-db-password # Patch password key

@@ -24,12 +24,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: app_secrets
+                  name: app-secrets
                   key: pgsql-password # Placeholder, different per each service
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata

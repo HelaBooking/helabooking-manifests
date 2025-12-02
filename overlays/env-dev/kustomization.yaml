@@ -16,8 +16,26 @@ resources:
 
 # Apply Dev-Specific Global Patches
 patches:
+  # Environment Variables Patch (Targets all Backends)
   - path: patch-env.yaml
-  - path: patch-resources.yaml
+    target:
+      kind: Deployment
+      name: "user-service|event-service|booking-service|ticketing-service|notification-service|audit-service"
+
+  # Frontend Resources (Target by Name matches automatically)
+  - path: patch-frontend.yaml
+
+  # Backend Resources (Targets all Backends)
+  - path: patch-backends.yaml
+    target:
+      kind: Deployment
+      name: "user-service|event-service|booking-service|ticketing-service|notification-service|audit-service"
+
+  # Database Resources (Targets all Databases)
+  - path: patch-databases.yaml
+    target:
+      kind: StatefulSet
+      name: "userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql"
 
 # Global Labels (Optional but recommended for querying)
 labels:
