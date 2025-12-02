@@ -8,6 +8,8 @@ metadata:
 spec:
   template:
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: pico-node
       containers:
         - name: postgres
           resources:
