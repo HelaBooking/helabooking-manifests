@@ -14,7 +14,28 @@ resources:
   - ../../components/audit-service
   - ../../components/frontend
 
-# Apply Dev-Specific Global Patches
+# -----------------------------------------------------------------
+# IMAGE MANAGEMENT
+# -----------------------------------------------------------------
+images:
+  - name: helabooking/user-service
+    newTag: dev-9b228eb
+  - name: helabooking/event-service
+    newTag: dev-9b228eb
+  - name: helabooking/booking-service
+    newTag: dev-f32fccc
+  - name: helabooking/ticketing-service
+    newTag: dev-9b228eb
+  - name: helabooking/notification-service
+    newTag: dev-9b228eb
+  - name: helabooking/audit-service
+    newTag: dev-9b228eb
+  - name: helabooking/frontend
+    newTag: dev-135b233
+
+# -----------------------------------------------------------------
+# PATCH MANAGEMENT
+# -----------------------------------------------------------------
 patches:
   # Environment Variables Patch (Targets all Backends)
   - path: patch-env.yaml
@@ -37,6 +58,9 @@ patches:
       kind: StatefulSet
       name: "userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql"
 
+# -----------------------------------------------------------------
+# COMMON LABELS
+# -----------------------------------------------------------------
 # Global Labels (Optional but recommended for querying)
 labels:
   - pairs:
