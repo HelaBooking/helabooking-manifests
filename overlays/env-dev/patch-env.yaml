@@ -12,4 +12,4 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "dev" # Patch the profile
             - name: SPRING_RABBITMQ_HOST
-              value: "rabbitmq-env-dev.svc.cluster.local" # Patch RabbitMQ host
+              value: "rabbitmq.env-dev.svc.cluster.local" # Patch RabbitMQ host
