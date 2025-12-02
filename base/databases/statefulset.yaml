@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: database # Placeholder
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1" # Ensure DBs are created first
 spec:
   serviceName: database
   replicas: 1

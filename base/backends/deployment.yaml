@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app # Placeholder name
+  annotations:
+    argocd.argoproj.io/sync-wave: "0" # Ensure DBs are created first
 spec:
   replicas: 1
   selector:
