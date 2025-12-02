@@ -20,8 +20,10 @@ patches:
         path: /metadata/name
         value: audit-service 
       - op: replace
-        path: /spec/template/spec/containers/0/ports/0/containerPort
-        value: 8086
+        path: /spec/template/spec/containers/0/ports/0
+        value: 
+          containerPort: 8086
+          name: http
 
   # INLINE PATCH: Configure Database StatefulSet (Rename Only)
   - target:
