@@ -60,13 +60,6 @@ spec:
                   key: jwt-secret-key
             - name: JWT_EXPIRATION
               value: "86400000" # Default 24h
-            # --- Force Enable Actuator Endpoints ---
-            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
-              value: "health,info,prometheus,metrics"
-            - name: MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS
-              value: "always"
-            - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
-              value: "true"
           resources:
             requests:
               memory: "256Mi"
@@ -76,13 +69,17 @@ spec:
               cpu: "500m"
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /actuator/health
               port: http
             initialDelaySeconds: 60
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness
+              path: /actuator/health
               port: http
             initialDelaySeconds: 60
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3

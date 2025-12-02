@@ -20,8 +20,8 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           livenessProbe:
-            initialDelaySeconds: 120
+            initialDelaySeconds: 90
             periodSeconds: 10
           readinessProbe:
-            initialDelaySeconds: 120
+            initialDelaySeconds: 90
             periodSeconds: 10
