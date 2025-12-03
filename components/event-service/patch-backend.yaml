@@ -25,7 +25,7 @@ spec:
                   key: pgsql-event-db-password # Patch password key
           livenessProbe:
             httpGet:
-              port: 8082 # Patch port
+              path: /api/events/health
           readinessProbe:
             httpGet:
-              port: 8082 # Patch port
+              path: /api/events/health

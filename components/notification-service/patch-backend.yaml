@@ -25,7 +25,7 @@ spec:
                   key: pgsql-notification-db-password # Patch password key
           livenessProbe:
             httpGet:
-              port: 8085 # Patch port
+              path: /actuator/health
           readinessProbe:
             httpGet:
-              port: 8085 # Patch port
+              path: /actuator/health

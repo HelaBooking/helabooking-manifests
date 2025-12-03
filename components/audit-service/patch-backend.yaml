@@ -25,7 +25,7 @@ spec:
                   key: pgsql-audit-db-password # Patch password key
           livenessProbe:
             httpGet:
-              port: 8086 # Patch port
+              path: /actuator/health
           readinessProbe:
             httpGet:
-              port: 8086 # Patch port
+              path: /actuator/health

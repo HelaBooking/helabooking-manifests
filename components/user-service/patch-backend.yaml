@@ -25,7 +25,7 @@ spec:
                   key: pgsql-user-db-password # Patch password key
           livenessProbe:
             httpGet:
-              port: 8081 # Patch port
+              path: /api/users/health
           readinessProbe:
             httpGet:
-              port: 8081 # Patch port
+              path: /api/users/health
