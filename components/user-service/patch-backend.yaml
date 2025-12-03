@@ -23,3 +23,9 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: pgsql-user-db-password # Patch password key
+          livenessProbe:
+            httpGet:
+              port: 8081 # Patch port
+          readinessProbe:
+            httpGet:
+              port: 8081 # Patch port

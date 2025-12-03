@@ -23,3 +23,9 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: pgsql-booking-db-password # Patch password key
+          livenessProbe:
+            httpGet:
+              port: 8083 # Patch port
+          readinessProbe:
+            httpGet:
+              port: 8083 # Patch port

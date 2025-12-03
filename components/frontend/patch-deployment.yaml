@@ -11,10 +11,10 @@ spec:
           image: helabooking/frontend:latest
           env:
             - name: USER_API_BASE_URL
-              value: "http://user-service-svc.env-dev.svc.cluster.local:8081/api" # Patch User Service URL
+              value: "http://user-service-svc:8081/api" # Patch User Service URL
             - name: EVENT_API_BASE_URL
-              value: "http://event-service-svc.env-dev.svc.cluster.local:8082/api" # Patch Event Service URL
+              value: "http://event-service-svc:8082/api" # Patch Event Service URL
             - name: BOOKING_API_BASE_URL
-              value: "http://booking-service-svc.env-dev.svc.cluster.local:8083/api" # Patch Booking Service URL
+              value: "http://booking-service-svc:8083/api" # Patch Booking Service URL
             - name: TICKETING_API_BASE_URL
-              value: "http://ticketing-service-svc.env-dev.svc.cluster.local:8084/api" # Patch Ticketing Service URL
+              value: "http://ticketing-service-svc:8084/api" # Patch Ticketing Service URL

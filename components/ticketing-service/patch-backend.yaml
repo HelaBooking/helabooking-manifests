@@ -23,3 +23,9 @@ spec:
                 secretKeyRef:
                   name: app-secrets
                   key: pgsql-ticketing-db-password # Patch password key
+          livenessProbe:
+            httpGet:
+              port: 8084 # Patch port
+          readinessProbe:
+            httpGet:
+              port: 8084 # Patch port
