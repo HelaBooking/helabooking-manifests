@@ -25,7 +25,7 @@ spec:
                   key: pgsql-audit-db-password # Patch password key
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /api/audits/health
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /api/audits/health
