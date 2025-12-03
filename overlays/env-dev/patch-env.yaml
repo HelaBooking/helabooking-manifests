@@ -13,9 +13,3 @@ spec:
               value: "dev" # Patch the profile
             - name: SPRING_RABBITMQ_HOST
               value: "rabbitmq.env-dev.svc.cluster.local" # Patch RabbitMQ host
-            # Tell Spring to use standard 'X-Forwarded-*' headers from Traefik
-            - name: SERVER_FORWARD_HEADERS_STRATEGY
-              value: "framework"
-            # Trust the internal K8s proxy IPs
-            - name: SERVER_TOMCAT_REMOTEIP_INTERNAL_PROXIES
-              value: ".*"
