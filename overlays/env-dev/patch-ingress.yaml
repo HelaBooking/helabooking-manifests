@@ -1,0 +1,4 @@
+##### Patching ingress for dev environment ######
+- op: replace
+  path: /spec/rules/0/host
+  value: hela.dev.ezbooking.lk

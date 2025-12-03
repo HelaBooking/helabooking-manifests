@@ -13,6 +13,7 @@ resources:
   - ../../components/notification-service
   - ../../components/audit-service
   - ../../components/frontend
+  - ../../base/ingress
 
 # -----------------------------------------------------------------
 # IMAGE MANAGEMENT
@@ -44,6 +45,12 @@ images:
 # PATCH MANAGEMENT
 # -----------------------------------------------------------------
 patches:
+  # Ingress Patch (Target by Name matches automatically)
+  - path: patch-ingress.yaml
+    target:
+      kind: Ingress
+      name: helabooking-app-ingress
+
   # Environment Variables Patch (Targets all Backends)
   - path: patch-env.yaml
     target:
