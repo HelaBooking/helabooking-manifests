@@ -6,76 +6,76 @@ namespace: env-dev
 
 # Aggregate all the Components
 resources:
-  - ../../components/user-service
-  - ../../components/event-service
-  - ../../components/booking-service
-  - ../../components/ticketing-service
-  - ../../components/notification-service
-  - ../../components/audit-service
-  - ../../components/frontend
-  - ../../base/ingress
+- ../../components/user-service
+- ../../components/event-service
+- ../../components/booking-service
+- ../../components/ticketing-service
+- ../../components/notification-service
+- ../../components/audit-service
+- ../../components/frontend
+- ../../base/ingress
 
 # -----------------------------------------------------------------
 # IMAGE MANAGEMENT
 # -----------------------------------------------------------------
 images:
-  - name: helabooking/user-service
-    newName: harbor.management.ezbooking.lk/helabooking/user-service
-    newTag: dev-9b228eb
-  - name: helabooking/event-service
-    newName: harbor.management.ezbooking.lk/helabooking/event-service
-    newTag: dev-9b228eb
-  - name: helabooking/booking-service
-    newName: harbor.management.ezbooking.lk/helabooking/booking-service
-    newTag: dev-f32fccc
-  - name: helabooking/ticketing-service
-    newName: harbor.management.ezbooking.lk/helabooking/ticketing-service
-    newTag: dev-9b228eb
-  - name: helabooking/notification-service
-    newName: harbor.management.ezbooking.lk/helabooking/notification-service
-    newTag: dev-99cf69f
-  - name: helabooking/audit-service
-    newName: harbor.management.ezbooking.lk/helabooking/audit-service
-    newTag: dev-99cf69f
-  - name: helabooking/frontend
-    newName: harbor.management.ezbooking.lk/helabooking/frontend
-    newTag: dev-c9c93b6
+- name: helabooking/audit-service
+  newName: harbor.management.ezbooking.lk/helabooking/audit-service
+  newTag: dev-99cf69f
+- name: helabooking/booking-service
+  newName: harbor.management.ezbooking.lk/helabooking/booking-service
+  newTag: dev-f32fccc
+- name: helabooking/event-service
+  newName: harbor.management.ezbooking.lk/helabooking/event-service
+  newTag: dev-9b228eb
+- name: helabooking/frontend
+  newName: harbor.management.ezbooking.lk/helabooking/frontend
+  newTag: dev-bd6c1b9
+- name: helabooking/notification-service
+  newName: harbor.management.ezbooking.lk/helabooking/notification-service
+  newTag: dev-99cf69f
+- name: helabooking/ticketing-service
+  newName: harbor.management.ezbooking.lk/helabooking/ticketing-service
+  newTag: dev-9b228eb
+- name: helabooking/user-service
+  newName: harbor.management.ezbooking.lk/helabooking/user-service
+  newTag: dev-9b228eb
 
 # -----------------------------------------------------------------
 # PATCH MANAGEMENT
 # -----------------------------------------------------------------
-patches:
   # Ingress Patch (Target by Name matches automatically)
-  - path: patch-ingress.yaml
-    target:
-      kind: Ingress
-      name: helabooking-app-ingress
 
   # Environment Variables Patch (Targets all Backends)
-  - path: patch-env.yaml
-    target:
-      kind: Deployment
-      name: "user-service|event-service|booking-service|ticketing-service|notification-service|audit-service"
 
   # Frontend Resources (Target by Name matches automatically)
-  - path: patch-frontend.yaml
 
   # Backend Resources (Targets all Backends)
-  - path: patch-backends.yaml
-    target:
-      kind: Deployment
-      name: "user-service|event-service|booking-service|ticketing-service|notification-service|audit-service"
 
   # Database Resources (Targets all Databases)
-  - path: patch-databases.yaml
-    target:
-      kind: StatefulSet
-      name: "userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql"
+patches:
+- path: patch-ingress.yaml
+  target:
+    kind: Ingress
+    name: helabooking-app-ingress
+- path: patch-env.yaml
+  target:
+    kind: Deployment
+    name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
+- path: patch-frontend.yaml
+- path: patch-backends.yaml
+  target:
+    kind: Deployment
+    name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
+- path: patch-databases.yaml
+  target:
+    kind: StatefulSet
+    name: userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql
 
 # -----------------------------------------------------------------
 # COMMON LABELS
 # -----------------------------------------------------------------
 # Global Labels (Optional but recommended for querying)
 labels:
-  - pairs:
-      environment: dev
+- pairs:
+    environment: dev
