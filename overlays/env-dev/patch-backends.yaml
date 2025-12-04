@@ -14,10 +14,10 @@ spec:
         - name: app
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "200m"
+              memory: "128Mi"
+              cpu: "100m"
             limits:
-              memory: "512Mi"
+              memory: "256Mi"
               cpu: "500m"
           livenessProbe:
             initialDelaySeconds: 90

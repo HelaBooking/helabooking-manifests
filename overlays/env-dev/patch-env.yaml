@@ -13,3 +13,5 @@ spec:
               value: "dev" # Patch the profile
             - name: SPRING_RABBITMQ_HOST
               value: "rabbitmq.env-dev.svc.cluster.local" # Patch RabbitMQ host
+            - name: MALLOC_ARENA_MAX # Optimize memory usage in dev
+              value: "2"
