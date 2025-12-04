@@ -15,3 +15,5 @@ spec:
               value: "rabbitmq.env-dev.svc.cluster.local" # Patch RabbitMQ host
             - name: MALLOC_ARENA_MAX # Optimize memory usage in dev
               value: "2"
+            - name: SERVER_FORWARD_HEADERS_STRATEGY # Allow forwarding headers for CORS handling
+              value: "framework"
