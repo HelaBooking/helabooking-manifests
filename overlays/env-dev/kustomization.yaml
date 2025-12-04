@@ -21,7 +21,7 @@ resources:
 images:
   - name: helabooking/audit-service
     newName: harbor.management.ezbooking.lk/helabooking/audit-service
-    newTag: dev-99cf69f
+    newTag: dev-0147ddb
   - name: helabooking/booking-service
     newName: harbor.management.ezbooking.lk/helabooking/booking-service
     newTag: dev-f32fccc
