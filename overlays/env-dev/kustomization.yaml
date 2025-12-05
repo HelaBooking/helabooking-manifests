@@ -27,7 +27,7 @@ images:
   newTag: dev-acb8c3b
 - name: helabooking/event-service
   newName: harbor.management.ezbooking.lk/helabooking/event-service
-  newTag: dev-4f130b7
+  newTag: dev-e05fbde
 - name: helabooking/frontend
   newName: harbor.management.ezbooking.lk/helabooking/frontend
   newTag: dev-927c497
@@ -39,7 +39,7 @@ images:
   newTag: dev-acb8c3b
 - name: helabooking/user-service
   newName: harbor.management.ezbooking.lk/helabooking/user-service
-  newTag: dev-acb8c3b
+  newTag: dev-e05fbde
 
 # -----------------------------------------------------------------
 # PATCH MANAGEMENT
