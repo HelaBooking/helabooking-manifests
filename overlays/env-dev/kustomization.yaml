@@ -27,7 +27,7 @@ images:
   newTag: dev-acb8c3b
 - name: helabooking/event-service
   newName: harbor.management.ezbooking.lk/helabooking/event-service
-  newTag: dev-628cb47
+  newTag: dev-e4ec01f
 - name: helabooking/frontend
   newName: harbor.management.ezbooking.lk/helabooking/frontend
   newTag: dev-927c497
