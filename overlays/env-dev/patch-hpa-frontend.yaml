@@ -6,11 +6,11 @@ metadata:
   name: hpa-frontend
 spec:
   minReplicas: 1
-  maxReplicas: 2
+  maxReplicas: 1
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 20
+          averageUtilization: 70
