@@ -75,3 +75,15 @@ patches:
     target:
       kind: StatefulSet
       name: database
+
+  # INLINE PATCH: Backend HPA Configuration (Rename)
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: hpa-backend
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: booking-hpa-backend
+      - op: replace
+        path: /spec/scaleTargetRef/name
+        value: booking-service

@@ -1,0 +1,42 @@
+# Base Horizontal Pod Autoscaler Template for Backend Applications
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-backend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend-app
+  minReplicas: 1
+  maxReplicas: 1 # Patch this
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 90 # Patch this
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 85 # Patch this
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 15 # Patch this. Wait 15s before another scale-up
+      selectPolicy: Max
+      policies:
+        - type: Pods
+          value: 2 # Patch this. Allow scaling up by 2 pods at a time
+          periodSeconds: 60
+        - type: Percent
+          value: 100
+          periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 180 # Patch this. Wait 3min before another scale-down
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 60
