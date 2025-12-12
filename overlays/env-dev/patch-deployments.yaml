@@ -1,0 +1,16 @@
+##### Patching Revision History and Updating Strategy for dev environment ######
+############# Deployments #############
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: all-deployments # Ignored
+spec:
+  # Limit History (Save disk space)
+  revisionHistoryLimit: 2
+
+  # Rate Limit Updates (Reduce load)
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2 # Create only 2 new pods at a time
+      maxUnavailable: 0 # Ensure no old pods die until new ones are ready

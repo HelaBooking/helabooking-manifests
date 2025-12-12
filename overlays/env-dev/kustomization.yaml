@@ -50,6 +50,7 @@ images:
 # Database Resources (Targets all Databases)
 # HPA for Frontend & Backends (Target by Name matches automatically and all Backends)
 # Istio Ingress Gateway Patch (Targets all Services)
+# Limit Deploymet Revision History & Update Strategy Patch (Targets all Deployments)
 patches:
   - path: patch-env.yaml
     target:
@@ -87,6 +88,13 @@ patches:
       - op: replace
         path: /spec/hosts/0
         value: "hela.dev.ezbooking.lk"
+  # Deployment Revision History & Update Strategy Patch
+  - path: patch-deployments.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: ".*"
 
 # -----------------------------------------------------------------
 # COMMON LABELS
