@@ -8,8 +8,8 @@ spec:
     istio: ingressgateway-pod-label # Default selector (will be patched later)
   servers:
     - port:
-        number: 443
-        name: https
-        protocol: HTTPS
+        number: 80
+        name: http
+        protocol: HTTP
       hosts:
         - "*"
