@@ -6,40 +6,40 @@ namespace: env-dev
 
 # Aggregate all the Components
 resources:
-  - ../../components/user-service
-  - ../../components/event-service
-  - ../../components/booking-service
-  - ../../components/ticketing-service
-  - ../../components/notification-service
-  - ../../components/audit-service
-  - ../../components/frontend
-  - ../../base/networking
+- ../../components/user-service
+- ../../components/event-service
+- ../../components/booking-service
+- ../../components/ticketing-service
+- ../../components/notification-service
+- ../../components/audit-service
+- ../../components/frontend
+- ../../base/networking
 
 # -----------------------------------------------------------------
 # IMAGE MANAGEMENT
 # -----------------------------------------------------------------
 images:
-  - name: helabooking/audit-service
-    newName: harbor.management.ezbooking.lk/helabooking/audit-service
-    newTag: dev-acb8c3b
-  - name: helabooking/booking-service
-    newName: harbor.management.ezbooking.lk/helabooking/booking-service
-    newTag: dev-acb8c3b
-  - name: helabooking/event-service
-    newName: harbor.management.ezbooking.lk/helabooking/event-service
-    newTag: dev-e4ec01f
-  - name: helabooking/frontend
-    newName: harbor.management.ezbooking.lk/helabooking/frontend
-    newTag: dev-b562c59
-  - name: helabooking/notification-service
-    newName: harbor.management.ezbooking.lk/helabooking/notification-service
-    newTag: dev-acb8c3b
-  - name: helabooking/ticketing-service
-    newName: harbor.management.ezbooking.lk/helabooking/ticketing-service
-    newTag: dev-acb8c3b
-  - name: helabooking/user-service
-    newName: harbor.management.ezbooking.lk/helabooking/user-service
-    newTag: dev-e05fbde
+- name: helabooking/audit-service
+  newName: harbor.management.ezbooking.lk/helabooking/audit-service
+  newTag: dev-794f542
+- name: helabooking/booking-service
+  newName: harbor.management.ezbooking.lk/helabooking/booking-service
+  newTag: dev-794f542
+- name: helabooking/event-service
+  newName: harbor.management.ezbooking.lk/helabooking/event-service
+  newTag: dev-794f542
+- name: helabooking/frontend
+  newName: harbor.management.ezbooking.lk/helabooking/frontend
+  newTag: dev-b562c59
+- name: helabooking/notification-service
+  newName: harbor.management.ezbooking.lk/helabooking/notification-service
+  newTag: dev-794f542
+- name: helabooking/ticketing-service
+  newName: harbor.management.ezbooking.lk/helabooking/ticketing-service
+  newTag: dev-794f542
+- name: helabooking/user-service
+  newName: harbor.management.ezbooking.lk/helabooking/user-service
+  newTag: dev-794f542
 
 # -----------------------------------------------------------------
 # PATCH MANAGEMENT
@@ -51,55 +51,55 @@ images:
 # HPA for Frontend & Backends (Target by Name matches automatically and all Backends)
 # Istio Ingress Gateway Patch (Targets all Services)
 # Limit Deploymet Revision History & Update Strategy Patch (Targets all Deployments)
-patches:
-  - path: patch-env.yaml
-    target:
-      kind: Deployment
-      name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
-  - path: patch-frontend.yaml
-  - path: patch-backends.yaml
-    target:
-      kind: Deployment
-      name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
-  - path: patch-databases.yaml
-    target:
-      kind: StatefulSet
-      name: userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql
-  - path: patch-hpa-frontend.yaml
-    target:
-      kind: HorizontalPodAutoscaler
-      name: hpa-frontend
-  - path: patch-hpa-backends.yaml
-    target:
-      kind: HorizontalPodAutoscaler
-      name: .*-hpa-backend
   # Istio Gateway & VirtualService Patches
-  - target:
-      kind: Gateway
-      name: istio-gateway
-    patch: |-
-      - op: replace
-        path: /spec/selector/istio
-        value: "ingressgateway-dev-public"
-  - target:
-      kind: VirtualService
-      name: istio-route
-    patch: |-
-      - op: replace
-        path: /spec/hosts/0
-        value: "hela.dev.ezbooking.lk"
   # Deployment Revision History & Update Strategy Patch
-  - path: patch-deployments.yaml
-    target:
-      group: apps
-      version: v1
-      kind: Deployment
-      name: ".*"
+patches:
+- path: patch-env.yaml
+  target:
+    kind: Deployment
+    name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
+- path: patch-frontend.yaml
+- path: patch-backends.yaml
+  target:
+    kind: Deployment
+    name: user-service|event-service|booking-service|ticketing-service|notification-service|audit-service
+- path: patch-databases.yaml
+  target:
+    kind: StatefulSet
+    name: userdb-pgsql|eventdb-pgsql|bookingdb-pgsql|ticketingdb-pgsql|notificationdb-pgsql|auditdb-pgsql
+- path: patch-hpa-frontend.yaml
+  target:
+    kind: HorizontalPodAutoscaler
+    name: hpa-frontend
+- path: patch-hpa-backends.yaml
+  target:
+    kind: HorizontalPodAutoscaler
+    name: .*-hpa-backend
+- patch: |-
+    - op: replace
+      path: /spec/selector/istio
+      value: "ingressgateway-dev-public"
+  target:
+    kind: Gateway
+    name: istio-gateway
+- patch: |-
+    - op: replace
+      path: /spec/hosts/0
+      value: "hela.dev.ezbooking.lk"
+  target:
+    kind: VirtualService
+    name: istio-route
+- path: patch-deployments.yaml
+  target:
+    group: apps
+    kind: Deployment
+    name: .*
+    version: v1
 
 # -----------------------------------------------------------------
 # COMMON LABELS
 # -----------------------------------------------------------------
 # Global Labels (Optional but recommended for querying)
 labels:
-  - pairs:
-      environment: dev
+- pairs:
+    environment: dev
