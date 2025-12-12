@@ -13,7 +13,7 @@ resources:
   - ../../components/notification-service
   - ../../components/audit-service
   - ../../components/frontend
-  - ../../base/ingress
+  - ../../base/networking
 
 # -----------------------------------------------------------------
 # IMAGE MANAGEMENT
@@ -44,17 +44,13 @@ images:
 # -----------------------------------------------------------------
 # PATCH MANAGEMENT
 # -----------------------------------------------------------------
-# Ingress Patch (Target by Name matches automatically)
 # Environment Variables Patch (Targets all Backends)
 # Frontend Resources (Target by Name matches automatically)
 # Backend Resources (Targets all Backends)
 # Database Resources (Targets all Databases)
 # HPA for Frontend & Backends (Target by Name matches automatically and all Backends)
+# Istio Ingress Gateway Patch (Targets all Services)
 patches:
-  - path: patch-ingress.yaml
-    target:
-      kind: Ingress
-      name: helabooking-app-ingress
   - path: patch-env.yaml
     target:
       kind: Deployment
@@ -76,6 +72,21 @@ patches:
     target:
       kind: HorizontalPodAutoscaler
       name: .*-hpa-backend
+  # Istio Gateway & VirtualService Patches
+  - target:
+      kind: Gateway
+      name: istio-gateway
+    patch: |-
+      - op: replace
+        path: /spec/selector/istio
+        value: "ingressgateway-dev-public"
+  - target:
+      kind: VirtualService
+      name: istio-route
+    patch: |-
+      - op: replace
+        path: /spec/hosts/0
+        value: "hela.dev.ezbooking.lk"
 
 # -----------------------------------------------------------------
 # COMMON LABELS

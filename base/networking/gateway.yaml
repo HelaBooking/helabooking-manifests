@@ -1,0 +1,15 @@
+# Base Gateway Template for Frontend Application
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: istio-gateway # Generic name (will be patched later)
+spec:
+  selector:
+    istio: ingressgateway-pod-label # Default selector (will be patched later)
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
