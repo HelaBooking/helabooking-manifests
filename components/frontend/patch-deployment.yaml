@@ -3,10 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  annotations:
-    # SYNC WAVE 100: ALWAYS LAST
-    # This ensures Frontend waits for all backends (Waves 1-99)
-    argocd.argoproj.io/sync-wave: "100"
 spec:
   template:
     spec:
