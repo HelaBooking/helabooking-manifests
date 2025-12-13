@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: frontend
   annotations:
-  argocd.argoproj.io/sync-wave: "100" # Deployed at last
+    argocd.argoproj.io/sync-wave: "100" # Deployed after backend services
 spec:
   replicas: 1
   selector:

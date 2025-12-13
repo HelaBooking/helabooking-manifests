@@ -24,7 +24,7 @@ patches:
         value: 8084
       - op: replace
         path: /metadata/annotations/argocd.argoproj.io~1sync-wave
-        value: "3"
+        value: "2"
 
   # INLINE PATCH: Configure Database StatefulSet (Rename Only)
   - target:
