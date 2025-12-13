@@ -13,10 +13,10 @@ spec:
         - name: web
           resources:
             requests:
-              memory: "128Mi"
+              memory: "50Mi"
               cpu: "50m"
             limits:
-              memory: "512Mi"
+              memory: "256Mi"
               cpu: "500m"
           env:
             - name: VITE_USER_API_BASE_URL

@@ -9,7 +9,7 @@ resources:
 
 # Patching Resources
 patches:
-  # INLINE PATCH: Configure Backend Deployment (Rename + Port)
+  # INLINE PATCH: Configure Backend Deployment (Rename + Port + Sync Wave)
   - target:
       group: apps
       version: v1
@@ -22,6 +22,9 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/ports/0/containerPort
         value: 8081
+      - op: replace
+        path: /metadata/annotations/argocd.argoproj.io~1sync-wave
+        value: "1"
 
   # INLINE PATCH: Configure Database StatefulSet (Rename Only)
   - target:

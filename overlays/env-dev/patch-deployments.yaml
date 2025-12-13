@@ -12,5 +12,5 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2 # Create only 2 new pods at a time
+      maxSurge: 1 # Create only 1 new pod at a time
       maxUnavailable: 0 # Ensure no old pods die until new ones are ready

@@ -14,10 +14,10 @@ spec:
         - name: postgres
           resources:
             requests:
-              memory: "256Mi"
+              memory: "100Mi"
               cpu: "75m"
             limits:
-              memory: "512Mi"
+              memory: "256Mi"
               cpu: "500m"
   volumeClaimTemplates:
     - metadata:
@@ -26,5 +26,5 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 1Gi
+            storage: 500Mi
         storageClassName: longhorn-sc

@@ -22,6 +22,9 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/ports/0/containerPort
         value: 8083
+      - op: replace
+        path: /metadata/annotations/argocd.argoproj.io~1sync-wave
+        value: "4"
 
   # INLINE PATCH: Configure Database StatefulSet (Rename Only)
   - target:
