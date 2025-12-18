@@ -21,25 +21,25 @@ resources:
 images:
 - name: helabooking/audit-service
   newName: harbor.management.ezbooking.lk/helabooking/audit-service
-  newTag: dev-794f542
+  newTag: dev-8e75f74
 - name: helabooking/booking-service
   newName: harbor.management.ezbooking.lk/helabooking/booking-service
-  newTag: dev-794f542
+  newTag: dev-8e75f74
 - name: helabooking/event-service
   newName: harbor.management.ezbooking.lk/helabooking/event-service
-  newTag: dev-401c702
+  newTag: dev-8e75f74
 - name: helabooking/frontend
   newName: harbor.management.ezbooking.lk/helabooking/frontend
   newTag: dev-b9f06bc
 - name: helabooking/notification-service
   newName: harbor.management.ezbooking.lk/helabooking/notification-service
-  newTag: dev-794f542
+  newTag: dev-8e75f74
 - name: helabooking/ticketing-service
   newName: harbor.management.ezbooking.lk/helabooking/ticketing-service
-  newTag: dev-794f542
+  newTag: dev-8e75f74
 - name: helabooking/user-service
   newName: harbor.management.ezbooking.lk/helabooking/user-service
-  newTag: dev-401c702
+  newTag: dev-8e75f74
 
 # -----------------------------------------------------------------
 # PATCH MANAGEMENT
