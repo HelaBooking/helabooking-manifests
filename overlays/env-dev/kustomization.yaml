@@ -30,7 +30,7 @@ images:
   newTag: dev-401c702
 - name: helabooking/frontend
   newName: harbor.management.ezbooking.lk/helabooking/frontend
-  newTag: dev-de29114
+  newTag: dev-f0650b1
 - name: helabooking/notification-service
   newName: harbor.management.ezbooking.lk/helabooking/notification-service
   newTag: dev-794f542
