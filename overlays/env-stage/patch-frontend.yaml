@@ -1,0 +1,29 @@
+##### Patching resource requests and limits for dev environment ######
+############# Frontend #############
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: galaxy-node
+      containers:
+        - name: web
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          env:
+            - name: VITE_USER_API_BASE_URL
+              value: "https://stage.hela.ezbooking.lk/api" # Patch User Service URL
+            - name: VITE_EVENT_API_BASE_URL
+              value: "https://stage.hela.ezbooking.lk/api" # Patch Event Service URL
+            - name: VITE_BOOKING_API_BASE_URL
+              value: "https://stage.hela.ezbooking.lk/api" # Patch Booking Service URL
+            - name: VITE_TICKETING_API_BASE_URL
+              value: "https://stage.hela.ezbooking.lk/api" # Patch Ticketing Service URL

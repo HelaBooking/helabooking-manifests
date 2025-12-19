@@ -1,0 +1,30 @@
+##### Patching resource requests and limits for dev environment ######
+############# Databases #############
+# Applies to all databases
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-resources-patch
+spec:
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: pico-node
+      containers:
+        - name: postgres
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 500Mi
+        storageClassName: longhorn-sc

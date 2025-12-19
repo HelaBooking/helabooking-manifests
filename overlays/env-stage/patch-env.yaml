@@ -1,0 +1,19 @@
+###### Patching environment variables for dev environment ######
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ignored # This patch targets specific resources by label or name matching below
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "stage" # Patch the profile
+            - name: SPRING_RABBITMQ_HOST
+              value: "rabbitmq.env-stage.svc.cluster.local" # Patch RabbitMQ host
+            - name: MALLOC_ARENA_MAX # Optimize memory usage in dev
+              value: "2"
+            - name: SERVER_FORWARD_HEADERS_STRATEGY # Allow forwarding headers for CORS handling
+              value: "framework"
