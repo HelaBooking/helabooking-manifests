@@ -5,8 +5,8 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: hpa-backend
 spec:
-  minReplicas: 1
-  maxReplicas: 1
+  minReplicas: 0
+  maxReplicas: 0
   metrics:
     - type: Resource
       resource:
